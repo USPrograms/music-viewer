@@ -51,12 +51,64 @@ const setlist = {
 // 2. Grab the HTML elements
 const selector = document.getElementById('set-selector');
 const songList = document.getElementById('song-list');
+const toggleButton = document.getElementById('toggle-button');
+const previousButton = document.getElementById('previous-button');
+const nextButton = document.getElementById('next-button');
+var song = { title: "Apache", url: "Apache.html" }; // Default song to load on page load
 
 // 3. The Render Function
+function selectSong(selectedSong) {
+  song = selectedSong;
+  loadSong(song);
+}
 
+function changeSong(forward) {
+    const currentSet = selector.value;
+    const songsInSet = setlist[currentSet];
 
-function loadSong(url) {
+    if (!songsInSet || songsInSet.length === 0) {
+        return;
+    }
+
+    const currentIndex = songsInSet.findIndex(s => s.title === song.title);
+    const setIndex = parseInt(currentSet.split("-")[1], 10);
+
+    if (forward) {
+        const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % songsInSet.length : 0;
+
+        if (nextIndex === 0 && currentIndex === songsInSet.length - 1 && setIndex < 3) {
+            const nextSet = `Set-${setIndex + 1}`;
+            selector.value = nextSet;
+            renderList(nextSet);
+            selectSong(setlist[nextSet][0]);
+            return;
+        }
+
+        selectSong(songsInSet[nextIndex]);
+    } else {
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : songsInSet.length - 1;
+
+        if (currentIndex === 0 && setIndex > 1) {
+            const prevSet = `Set-${setIndex - 1}`;
+            selector.value = prevSet;
+            renderList(prevSet);
+            selectSong(setlist[prevSet][setlist[prevSet].length - 1]);
+            return;
+        }
+
+        selectSong(songsInSet[prevIndex]);
+    }
+}
+
+function loadSong(song) {
   // Implementation for loading a song
+  let songUrl = `cheat-sheets/${song.url}`;
+  fetch(songUrl)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('main-content').innerHTML = data;
+        document.getElementById('song-title').textContent = song.title;
+      });
   
 }
 
@@ -76,11 +128,8 @@ function renderList(setName) {
       link.href = song.url;
       link.textContent = song.title; 
       link.addEventListener('click', function(event) {
-        // THIS IS THE MAGIC LINE: It stops the link from actually opening the URL
-        event.preventDefault(); 
-        
-        // Now run your custom function instead
-        loadDocument(song.url);
+        event.preventDefault();
+        selectSong(song);
       });
       listItem.appendChild(link);
       songList.appendChild(listItem);
@@ -95,10 +144,28 @@ selector.addEventListener('change', function(event) {
   renderList(selectedSet);
 });
 
+toggleButton.addEventListener('click', function() {
+  const leftBar = document.querySelector('.left-bar');
+    if (leftBar.style.display === 'none') {
+        leftBar.style.display = 'block';    
+    }
+    else {
+        leftBar.style.display = 'none';
+    }  
+});
+
+previousButton.addEventListener('click', function() {
+    changeSong(false);
+});
+
+nextButton.addEventListener('click', function() {
+    changeSong(true);
+});
 // 5. Initialize the list on page load
 // This ensures the list isn't empty when the user first arrives
 // console.log("Selector found:", selector);
 // console.log("List container found:", songList);
 // console.log("Current value of selector:", selector ? selector.value : "N/A");
 // console.log("Data for that value:", selector ? setlist[selector.value] : "N/A");
+selectSong(song);
 renderList(selector.value);
