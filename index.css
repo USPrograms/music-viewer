@@ -25,7 +25,7 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: minmax(280px, 320px) 1fr;
+  grid-template-columns: auto 1fr; /* This is the critical change */
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
@@ -161,16 +161,21 @@ body {
 #song-title {
   /* flex: 1; */
   margin: 0;
+  padding: 0;
   color: var(--text-light);
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
-  text-align: center;
+  /* font-size: clamp(1.15rem, 1vw, 1.45rem); */
+  /* text-align: center; */
   /* color: var(--text); */
+  width: 25vw;
+  text-align: center;
+  line-height: 0;
 }
 .middle-section {
   display: flex;
   align-items: center;
-  gap: 6vw;
+  /* gap: 6vw; */
   flex: 1;
+  height: 100%;
   justify-content: center;
 }
 #main-content {
