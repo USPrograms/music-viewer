@@ -105,9 +105,14 @@ function loadSong(song) {
   let songUrl = `cheat-sheets/${song.url}`;
   fetch(songUrl)
       .then(response => response.text())
-      .then(data => {
-        document.getElementById('main-content').innerHTML = data;
+      .then(htmlString => {
+        document.getElementById('main-content').innerHTML = htmlString;
+        oldSongTitle = document.getElementById('song-title').textContent;
         document.getElementById('song-title').textContent = song.title;
+        songId = `song-${song.title.replace(/\s+/g, '-')}`;
+        oldSongId = `song-${oldSongTitle.replace(/\s+/g, '-')}`;
+        document.getElementById(oldSongId).classList.remove('selected-song');
+        document.getElementById(songId).classList.add('selected-song');
       });
   
 }
@@ -126,7 +131,8 @@ function renderList(setName) {
       const link = document.createElement('a');
       
       link.href = song.url;
-      link.textContent = song.title; 
+      link.textContent = song.title;
+      link.id = `song-${song.title.replace(/\s+/g, '-')}`; // Replace spaces with hyphens for ID 
       link.addEventListener('click', function(event) {
         event.preventDefault();
         selectSong(song);
@@ -167,5 +173,6 @@ nextButton.addEventListener('click', function() {
 // console.log("List container found:", songList);
 // console.log("Current value of selector:", selector ? selector.value : "N/A");
 // console.log("Data for that value:", selector ? setlist[selector.value] : "N/A");
-selectSong(song);
+
 renderList(selector.value);
+selectSong(song);

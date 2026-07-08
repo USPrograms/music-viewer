@@ -79,13 +79,14 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 1vh;
   overflow-y: auto;
   padding-right: 4px;
 }
 
 #song-list li {
   margin: 0;
+  font-family: "overpass", sans-serif;
 }
 
 #song-list a {
@@ -103,11 +104,16 @@ body {
 
 #song-list a:hover,
 #song-list a:focus-visible {
-  background: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.28);
   transform: translateX(2px);
   outline: none;
 }
-
+.selected-song {
+  background: rgba(255,255,255,0.35) !important;
+  /* background: green !important; */
+  transform: translateX(2px);
+  outline: none;
+}
 .top-bar {
   /* grid-column: 2; */
   background: var(--panel-strong);
@@ -160,13 +166,17 @@ body {
 
 #song-title {
   /* flex: 1; */
+  font-family: "overpass", sans-serif;
+  font-weight: 800;
   margin: 0;
   padding: 0;
   color: var(--text-light);
   /* font-size: clamp(1.15rem, 1vw, 1.45rem); */
   /* text-align: center; */
   /* color: var(--text); */
-  width: 25vw;
+  min-width: 35vw;
+  font-optical-sizing: auto;
+  font-style: normal;
   text-align: center;
   line-height: 0;
 }
@@ -184,6 +194,8 @@ body {
   /* overflow: auto; */
   background: var(--bg);
   max-width: 100%;
+  /* white-space: pre-wrap; Forces the browser to respect tabs, spaces, and line breaks */
+  /* tab-size: 4;           Defines how wide a tab should be */
 }
 
 #main-content > *:first-child {
