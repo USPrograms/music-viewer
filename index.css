@@ -124,6 +124,7 @@ body {
   align-items: center;
   gap: 12px;
   border-bottom: 1px solid var(--border);
+  width: 100wv;
 }
 
 .top-bar button,
