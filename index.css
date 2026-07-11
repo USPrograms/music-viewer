@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
-  /* --bg: #f4f6fb; */
-  --bg: white;
+  --bg: #f4f6fb;
+  /* --bg: white; */
   --panel: #ffffff;
   --panel-strong: #1f2d44;
   --accent: #2563eb;
@@ -26,13 +26,15 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: auto 1fr; /* This is the critical change */
+  grid-template-columns: auto 1fr; 
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
 
 .container:has(.left-bar[style*="display: none"]) {
-  grid-template-columns: 0 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
 }
 
 .left-bar {
@@ -195,10 +197,11 @@ body {
   /* grid-column: 2; */
   padding: 24px;
   /* overflow: auto; */
-  background: var(--bg);
+  /* background: var(--bg); */
   /* background: white; */
   max-width: 100vw !important;
-  width: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
   /* white-space: pre-wrap; Forces the browser to respect tabs, spaces, and line breaks */
   /* tab-size: 4;           Defines how wide a tab should be */
 }
