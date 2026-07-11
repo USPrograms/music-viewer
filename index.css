@@ -1,6 +1,7 @@
 :root {
   color-scheme: light;
-  --bg: #f4f6fb;
+  /* --bg: #f4f6fb; */
+  --bg: white;
   --panel: #ffffff;
   --panel-strong: #1f2d44;
   --accent: #2563eb;
@@ -193,6 +194,7 @@ body {
   padding: 24px;
   /* overflow: auto; */
   background: var(--bg);
+  /* background: white; */
   max-width: 100%;
   /* white-space: pre-wrap; Forces the browser to respect tabs, spaces, and line breaks */
   /* tab-size: 4;           Defines how wide a tab should be */
