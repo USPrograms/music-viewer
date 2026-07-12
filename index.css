@@ -44,7 +44,7 @@ body {
   padding: 18px 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 3vh;
+  /* gap: 3vh; */
   box-shadow: var(--shadow);
   z-index: 1;
   width: 320px;
@@ -71,6 +71,7 @@ body {
   color: var(--text);
   font-size: 1rem;
   font-weight: 600;
+  margin-bottom: 2vh;
 }
 
 #set-selector option {
@@ -84,7 +85,8 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  /* gap: 1vh; */
+ 
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -92,6 +94,7 @@ body {
 #song-list li {
   margin: 0;
   font-family: "overpass", sans-serif;
+  margin-bottom: 1vh;
 }
 
 #song-list a {
@@ -121,15 +124,19 @@ body {
 .top-bar {
   /* grid-column: 2; */
   background: var(--panel-strong);
-  padding: 16px 20px;
+  /* padding: 16px 20px; */
+  padding: 16px 0px;
+
   display: flex;
   align-items: center;
-  gap: 12px;
+  /* gap: 12px; */
   border-bottom: 1px solid var(--border);
   min-width: 100vw;
   width: 100%;
 }
-
+#toggle-button{
+  margin-left:2px;
+}
 .top-bar button,
 #toggle-button,
 #previous-button,
